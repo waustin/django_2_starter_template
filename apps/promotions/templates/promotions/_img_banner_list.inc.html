@@ -1,0 +1,14 @@
+{% load thumbnail %}
+<div class="banner-list img-banner-list">
+{% for b in banners %}
+    <div class="banner">
+        {% if b.url %}
+            <a href="{{b.url}}">
+                <img src="{% thumbnail b.image.path banner_size crop upscale quality=90 %}" alt="{{b.title}}"/>
+            </a>
+        {% else %}
+             <img src="{% thumbnail b.image.path banner_size crop upscale quality=90 %}" alt="{{b.title}}"/>
+        {% endif %}
+    </div>
+{% endfor %}
+</div>

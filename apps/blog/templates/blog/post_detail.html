@@ -1,0 +1,27 @@
+{% extends "blog/blog_base.html" %}
+{% block title %} {{post.title}} | {% endblock %}
+
+{% block body_class %}blog-post-detail blog{% endblock %}
+
+{% block content %}
+<article class="post {% if post.is_featured %}featured{% endif %}">
+	<header class="content-header">
+		<time class="date" pubdate datetime="{{post.publish_date|date:"Y-m-d"}}"><span>Published</span> {{post.publish_date|date:"F j, Y"}}</time>
+        <h1 class="title">{{post.title}}</h1>
+    </header>
+
+	<div class="content">
+        {{post.content|safe}}
+	</div>
+	<footer class="meta"></footer>
+</article>
+{% endblock %}
+
+{% block opengraph %}
+    {% load thumbnail %}
+    <meta property="og:title" content="{{post.title}}" />
+    {% if post.thumbnail %}
+        <meta property="og:image" content="{% thumbnail post.thumbnail.path 600x400 crop %}" />
+    {% endif %}
+{% endblock opengraph %}
+

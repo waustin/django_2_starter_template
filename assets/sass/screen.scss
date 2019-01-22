@@ -1,0 +1,92 @@
+@import "partials/base";
+
+.section-header {
+    @extend %wrapper;
+    padding-top: 8%;
+    padding-bottom: 8%;
+    background: $DARK_GREY ;
+    background-size: cover;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    .title {
+        color: white;
+        margin-bottom: 0;
+        font-size: 8vw;
+    }
+    @include respond-to("min-width: " + $SMALL_SCREEN_WIDTH) {
+        .title {
+            font-size: 5vw;
+        }
+    }
+}
+.main-content-wrapper {
+    @extend %wrapper;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    @include respond-to("min-width: " + $SMALL_SCREEN_WIDTH) {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    @include respond-to("min-width: " + $MEDIUM_SCREEN_WIDTH) {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    @include respond-to("min-width: " + $LARGE_SCREEN_WIDTH) {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+}
+
+.sub-nav {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 500px;
+    border: 1px solid $LIGHT_GREY;
+    padding: 20px;
+    margin-bottom: 40px;
+
+    .sub-nav-title {
+        @include font-size(1.8);
+        font-weight: bold;
+        margin-bottom: 20px;
+        line-height: 1.2;
+    }
+    ul {
+        margin: 0;
+        padding: 0;
+        @include font-size(1.6);
+        list-style-type: none;
+        li {
+            margin-bottom: 10px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+        li.selected a, a.current_item {
+            color: darken($LINK_COLOR, 10%)
+        }
+        a {
+            display: block;
+            line-height: 1.25;
+            padding: 3px 0;
+            text-decoration: none;
+        }
+    }
+}
+
+.main-footer {
+    @extend %wrapper;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid $MEDIUM_GREY;
+    .copyright {
+        @include font-size(1.1);
+        margin-bottom: 0;
+    }
+}
+
+@import "partials/form";
+@import "partials/pagination";
+@import "partials/page_content";

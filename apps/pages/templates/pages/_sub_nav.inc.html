@@ -1,0 +1,20 @@
+{% load mptt_tags %}
+{% if nodes %}
+	<nav class="sidebar-nav">
+		<h2  class="nav-title {% if selected_page == root %}selected{% endif %}"><a href="{{root.get_absolute_url}}">{{root.title}}</a></h2>
+		<ul class="root">
+
+			{% recursetree nodes %}
+			<li {% if selected_page == node %}class="selected"{% endif %}>
+				<a href="{{node.get_absolute_url}}">{{ node.title }}</a>
+				{% if not node.is_leaf_node %}
+					<ul class="children level-{{node.level}}">
+						{{ children }}
+					</ul>
+				{% endif %}
+		    </li>
+			{% endrecursetree %}
+		</ul>
+	</nav>
+{% endif %}
+

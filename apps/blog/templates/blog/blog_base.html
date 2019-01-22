@@ -1,0 +1,22 @@
+{% extends "two_column_layout_base.html" %}
+
+
+
+{% block body_class %}blog{% endblock %}
+{% block title %}News - {% endblock %}
+
+{% block sidebar %}
+{% load blog_tags %}
+<nav class="sub-nav">
+    {% get_all_categories as cats %}
+    <h4 class="nav-title">Categories</h4>
+	<ul>
+		<li {% if not category %}class="selected"{% endif %}><a href="{% url "blog_post_latest" %}">All Blog Posts</a></li>
+		{% for c in cats %}
+			<li{% if c == category %} class="selected" {% endif %}><a href="{{c.get_absolute_url}}">{{c.name}}</a></li>
+		{% endfor %}
+	</ul>
+</nav>
+
+{{block.super}}
+{% endblock %}

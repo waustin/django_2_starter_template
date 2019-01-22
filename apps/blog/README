@@ -1,0 +1,8 @@
+A Blog app that allows for DRAFT, PUBLIC, PRIVATE blog posts.
+Draft posts are only viewable by staff
+Private posts are only visible to the authenticated / active users
+Public posts are viewable by everyone
+
+Posts published in the future are only visible to staff
+
+Standard blog field for: title, slug, pub date, excerpt, content, thumbnail and categories

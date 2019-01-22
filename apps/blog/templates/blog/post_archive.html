@@ -1,0 +1,14 @@
+{% extends "blog/blog_base.html" %}
+{% block title %} {% if category %}{{category.name}} - {% endif %} {{block.super}} {% endblock %}
+
+{% block content %}
+    <header class="content-header">
+        {% if category %}
+            <h1 class="title">{{category.name}}</h1>
+        {% else %}
+            <h1 class="title">Latest Updates</h1>
+        {% endif %}
+    </header>
+	{% include "blog/_post_list.inc.html" %}
+	{% include "_pagination.inc.html" %}
+{% endblock content %}

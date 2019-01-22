@@ -1,0 +1,11 @@
+Pages is a custom page app work the Oaklawn website.
+Pages is based on an existing CJRW pages app that is used on a lot of sites.
+Pages adds header image and excerpt fields.
+The Header Image is displayed at the top of the page and can also be used as a thumbnail for lists of pages.
+The Excerpt is used on page listing.
+(Display Order)??? - Do I need a way to control which pages are orderd on the list?
+
+
+TemplateTags:
+  - get_child_pages( parent_page__slug, cache_time=None )
+    - Gets a list of sub pages for a given parent page. Useful for building page sub-navigation.

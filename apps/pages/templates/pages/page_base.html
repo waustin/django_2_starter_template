@@ -1,0 +1,56 @@
+{% extends "two_column_layout_base.html" %}
+
+
+{% block content %}
+<article class="page">
+    <div class="content">
+        {{ page.content|safe }}
+    </div>
+</article>
+{% endblock %}
+
+{% block sidebar %}
+{% load sitetree %}
+    {% if page.nav_menu %}
+        <nav class="sub-nav">
+            <h4 class="sub-nav-title">{{page.nav_menu.title}}</h4>
+            {% sitetree_menu from page.nav_menu.alias include "trunk,topmenu" template "_sitetree_sub_nav.inc.html" %}
+        </nav>
+    {% endif %}
+{% endblock sidebar %}
+
+{% block opengraph %}
+    <meta property="og:title" content="{{page.title}}" />
+{% endblock opengraph %}
+
+{% block title %}
+    {% if page.head_title %}
+        {{page.head_title}}
+    {% else %}
+        {{page.title}}
+    {% endif %} |
+{% endblock %}
+
+{% block body_class %}page {{page.relative_url}} {% endblock body_class %}
+
+{% block extra_head %}
+    {{ block.super }}
+    {% if page.meta_description %}
+        <meta name="description" content="{{page.meta_description}}"/>
+    {% endif %}
+{% endblock %}
+
+{% block section_header %}
+    {% if page.parent %}<h4 class="section-title">{{page.parent.title}}</h4>{% endif %}
+    <h1 class="title">{{page.title}}</h1>
+{% endblock section_header %}
+
+{% block section_header_style %}
+    {% if page.header_image %}
+        background-image:url({{page.header_image.url}});
+    {% else %}
+        {{block.super}}
+    {% endif %}
+{% endblock section_header_style %}
+
+

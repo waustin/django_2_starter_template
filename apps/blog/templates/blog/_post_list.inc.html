@@ -1,0 +1,51 @@
+{% load staticfiles %}
+{% load thumbnail %}
+<div class="post-list">
+{% for p in posts %}
+<article class="post {% if p.is_featured %}featured{% endif %}">
+
+		{% if p.is_featured %}
+			<div class="media-img">
+				<a href="{{p.get_absolute_url}}">
+				{% if p.thumbnail %}
+					<img src="{% thumbnail p.thumbnail.path 860x380 crop %}" alt="{{p.title}}"/>
+				{% else %}
+					<img src="{% static 'images/article_default_featured_thumb.jpg' %}" alt="{{p.title}}"/>
+				{% endif %}
+				</a>
+			</div>
+		{% else %}
+			<div class="media-img">
+				<a href="{{p.get_absolute_url}}">
+				{% if p.thumbnail %}
+					<img src="{% thumbnail p.thumbnail.path 350x300 crop %}" alt="{{p.title}}"/>
+				{% else %}
+                <img src="{% static 'images/article_default_thumb.jpg' %}" alt="{{p.title}}"/>
+				{% endif %}
+				</a>
+			</div>
+		{% endif %}
+
+		<div class="media-body">
+			<header>
+				<time pubdate datetime="{{p.publish_date|date:"Y-m-d"}}"><span>Published</span> {{p.publish_date|date:"F j, Y"}}</time>
+				<h2 class="title"><a href="{{p.get_absolute_url}}">{{p.title}}</a></h2>
+			</header>
+			<div class="excerpt">
+				<p>
+				{% if p.excerpt %}
+					{{p.excerpt}}
+				{% else %}
+					{{p.content|striptags|truncatewords:40|safe}}
+				{% endif %}
+				</p>
+			</div>
+			<a href="{{p.get_absolute_url}}" class="more">Read More <i class="fa fa-angle-right"></i></a>
+		</div>
+	</article>
+{% empty %}
+	<article class="post empty">
+		<h4>No articles have been published at this time</h4>
+	</article>
+{% endfor %}
+</div>

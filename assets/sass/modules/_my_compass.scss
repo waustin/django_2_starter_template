@@ -1,0 +1,62 @@
+// Compass functions I still use
+//***************************************
+// Reset the box model measurements.
+@mixin reset-box-model {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+// This basic method is preferred for the usual case, when positioned
+// content will not show outside the bounds of the container.
+//
+// Recommendations include using this in conjunction with a width.
+// Credit: [quirksmode.org](http://www.quirksmode.org/blog/archives/2005/03/clearing_floats.html)
+@mixin clearfix-nooverflow {
+    overflow: hidden;
+}
+// This is an updated version of the PIE clearfix method that reduces the amount of CSS output.
+// If you need to support Firefox before 3.5 you need to use `legacy-pie-clearfix` instead.
+//
+// Adapted from: [A new micro clearfix hack](http://nicolasgallagher.com/micro-clearfix-hack/)
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+// This older method from Position Is Everything called
+// [Easy Clearing](http://www.positioniseverything.net/easyclearing.html)
+// has the advantage of allowing positioned elements to hang
+// outside the bounds of the container at the expense of more tricky CSS.
+@mixin legacy-pie-clearfix {
+  &:after {
+    content    : "\0020";
+    display    : block;
+    height     : 0;
+    clear      : both;
+    overflow   : hidden;
+    visibility : hidden;
+  }
+}
+
+
+@mixin no-bullet {
+    list-style-image: none;
+    list-style-type: none;
+    margin-left: 0;
+}
+
+@mixin inline-block-list($padding: 0) {
+    @include reset-box-model;
+    @include clearfix;
+    li {
+        @include no-bullet;
+        display: inline-block;
+        vertical-align: middle;
+        white-space: nowrap;
+        padding-left: $padding;
+        padding-right: $padding;
+    }
+}
